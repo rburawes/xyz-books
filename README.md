@@ -8,7 +8,7 @@ Following are the steps to run:
 * Go to root directory of the project and execute `mvn clean install -U`.
 * Run the application by executing `java -jar target/xyz-books-0.0.1-SNAPSHOT.jar` or `./mvnw spring-boot:run`.
 * Open your browser and go to `http://localhost:8080`.
-* Start testing the search book by `ISBN10` or `ISBN13`.
+* Start testing the search book by `ISBN10` or `ISBN13`. e.g. `1591847818, 9780981531618, 9781591847816, 9781591846352`
 * `ctrl + c` to exit or stop the application.
 
 ### Data
