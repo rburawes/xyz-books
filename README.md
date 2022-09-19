@@ -35,5 +35,7 @@ These are the available APIs.
 * Spring Boot - Backend side.
 * Thymeleaf, Bootstrap 4, jQuery - Front-end
 * Spring Data JPA - Persistence/ORM
+
+> **_NOTE:_**  To build and run the application `Maven 3` and `Java 8` is required to be installed and properly setup on your machine.
   
 
