@@ -8,9 +8,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class XyzBooksApplicationTests {
+    private static final String BOOK_API_ROOT = "http://localhost:8080/api/v1/books";
 
     @Test
     void contextLoads() {
     }
-
 }

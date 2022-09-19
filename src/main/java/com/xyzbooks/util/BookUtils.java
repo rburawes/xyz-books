@@ -70,6 +70,13 @@ public class BookUtils {
         }
     }
 
+    /**
+     * Used the ISNB10 to ISBN13 validator and conversion API
+     * from apache commons-validator.
+     *
+     * @param isbn
+     * @return
+     */
     public static List<String> validateAndConvertIsbn(String isbn) {
         ISBNValidator isbnValidator = new ISBNValidator();
         List<String> isbnFormats = new ArrayList<>();
@@ -84,18 +91,24 @@ public class BookUtils {
         return isbnFormats;
     }
 
-    private static String convertToISBN10(String s) {
-        int b = 0;
-        int c = 0;
+    /**
+     * The formula used for the conversion of ISBN-13 to ISBN-10 is from here:
+     * https://isbn-information.com/the-10-digit-isbn.html
+     *
+     * @param isbn13
+     * @return the ISBN10 equivalent value of the given ISBN13
+     */
+    public static String convertToISBN10(String isbn13) {
         int count = 10;
-        String st = s.trim().substring(3, 12);
-        for (int a = 0; a < st.length(); a++) {
-            b = Integer.parseInt(st.charAt(a) + "");
-            b = b + c * count;
+        int sum = 0;
+        String trimmedISBN13 = isbn13.trim().substring(3, isbn13.length() - 1);
+        for (int a = 0; a < trimmedISBN13.length(); a++) {
+            int digit = Integer.parseInt(trimmedISBN13.charAt(a) + "");
+            sum = sum + (digit * count);
             count--;
         }
-        b = (11 - (b % 11)) % 11;
-        return st + "" + b;
+        int checkDigit = 11 - (sum % 11);
+        return String.format("%s%s", trimmedISBN13, checkDigit);
     }
 
 }
