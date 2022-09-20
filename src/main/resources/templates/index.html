@@ -16,20 +16,18 @@
     <span class="navbar-brand mb-0 h1" th:text="${applicationName}"/>
 </nav>
 
-<div class="container" style="min-height: 500px">
-    <form id="search-form" class="mt-4">
-        <div class="form-group">
-            <label for="isbn" class="sr-only">ISBN</label>
-            <input type="text" class="form-control rounded" id="isbn" aria-describedby="search-addon"
-                   placeholder="Enter ISBN10 or ISBN13">
-            <small class="form-text text-muted"></small>
-            <div class="alert alert-danger hidden" role="alert" id="error"/>
-        </div>
-        <button type="submit" class="btn btn-primary mb-2" id="isbn-search">Search</button>
-    </form>
-    <div class="table-responsive hidden" id="resultHolder">
-        <table class="table table-striped w-auto" id="result">
-            <thead>
+<div class="container" style="min-height: 500px; padding-top: 60px">
+    <div class="form-group">
+        <form class="form-inline mt-4" id="search-form">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="isbn" class="sr-only">ISBN</label>
+                <input type="text" class="form-control" id="isbn" placeholder="Enter ISBN10 or ISBN13">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2" id="isbn-search">Search</button>
+        </form>
+        <div class="table-responsive w-100 d-block d-md-table" id="resultHolder">
+            <table class="table table-striped w-auto" id="result">
+                <thead class="thead-light">
                 <tr class="table-info">
                     <th scope="col"></th>
                     <th scope="col">Title</th>
@@ -40,13 +38,19 @@
                     <th scope="col">Publisher</th>
                     <th scope="col">Edition</th>
                 </tr>
-            </thead>
-            <tbody/>
-        </table>
+                </thead>
+                <tbody/>
+            </table>
+        </div>
+        <div class="alert alert-danger hidden" role="alert" id="error"/>
     </div>
 </div>
-<div class="footer-copyright text-center py-3">© 2022 Copyright:
-    <a href="https://github.com/rburawes">XYZ Source</a>
-</div>
+<!-- Footer -->
+<footer class="page-footer font-small blue">
+    <div class="footer-copyright text-center py-3">© 2022 Copyright:
+        <a href="https://github.com/rburawes/xyz-books">XYZ Source</a>
+    </div>
+</footer>
+<!-- Footer -->
 </body>
 </html>

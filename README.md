@@ -1,5 +1,7 @@
 # Quick Guide
 
+This application demonstrates book search using ISBN10 or ISBN13.
+
 ### How To Run
 
 Following are the steps to run:
@@ -8,7 +10,9 @@ Following are the steps to run:
 * Go to root directory of the project and execute `mvn clean install -U`.
 * Run the application by executing `java -jar target/xyz-books-0.0.1-SNAPSHOT.jar` or `./mvnw spring-boot:run`.
 * Open your browser and go to `http://localhost:8080`.
-* Start testing the search book by `ISBN10` or `ISBN13`. e.g. `1591847818, 9780981531618, 9781591847816, 9781591846352`
+  - Start testing the search book by `ISBN10` or `ISBN13` e.g. 
+  - ISBN10: `1591847818` and `0315782145` 
+  - ISBN13: `9780981531618`, `9781591847816`, `9781591846352` and `9780134190440`
 * `ctrl + c` to exit or stop the application.
 
 ### Data
@@ -36,6 +40,6 @@ These are the available APIs.
 * Thymeleaf, Bootstrap 4, jQuery - Front-end
 * Spring Data JPA - Persistence/ORM
 
-> **_NOTE:_**  To build and run the application `Maven 3` and `Java 8` is required to be installed and properly setup on your machine.
+> **_NOTE:_**  To build and run the application `Maven 3 (3.8.6)` and `Java 8 (1.8.0_333)` is required to be installed and properly setup on your machine.
   
 

@@ -10,21 +10,22 @@ $(document).ready(function () {
         try {
             submit_request();
         } catch (err) {
-            console.log(err.message);
-            $('#error').html(err.message);
+            console.log(err);
+            $("#result").find("tr:not(:first)").remove();
+            $("#error").html(err.message);
+            $("#error").show();
         }
     });
 });
 
 function submit_request() {
-    let isbn = $("#isbn").val();
+    let isbn = $("#isbn").val().replace(/-/g,"");
     // if not valid then it will not call the API
-    validate_isbn(isbn);
     console.log("ISBN value: " + isbn);
+    validate_isbn(isbn);
     $("#isbn-search").prop("disabled", true);
     $("#error").hide();
     $("#result").find("tr:not(:first)").remove();
-    $("#resultHolder").hide();
     $.ajax({
         type: "GET",
         contentType: "application/json",
@@ -34,7 +35,7 @@ function submit_request() {
         timeout: 600000,
         success: function (data) {
             let tableData = "<tr>\n" +
-                "<th scope=\"row\"><img src='" + data.imageUrl + "'/></th>\n" +
+                "<th scope=\"row\"><img src='" + data.imageUrl + "' class='img-thumbnail'/></th>\n" +
                 "<td>" + data.title + "</td>\n" +
                 "<td>" + data.authors + "</td>\n" +
                 "<td>" + data.isbn + "</td>\n" +
@@ -44,13 +45,11 @@ function submit_request() {
                 "<td>" + data.edition + "</td>\n" +
                 "</tr>"
             $('#result').append(tableData);
-            $("#resultHolder").show();
             console.log("SUCCESS : ", data);
             $("#isbn-search").prop("disabled", false);
         },
         error: function (e) {
             console.log("Error: ", e);
-            $("#resultHolder").hide();
             $("#error").show();
             if (e.status === 400) {
                 $('#error').html("Invalid ISBN");
