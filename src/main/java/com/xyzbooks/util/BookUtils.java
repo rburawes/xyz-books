@@ -17,6 +17,7 @@ import java.util.Set;
 public class BookUtils {
 
     private static final ISBNValidator isbnValidator = new ISBNValidator();
+    private static final String ISBN_13_PREFIX = "978";
 
     public static String convertAuthorsToString(Set<Author> authors) {
         String authorNames = "";
@@ -84,7 +85,7 @@ public class BookUtils {
     public static List<String> getIsbnVersions(String isbn) {
         List<String> isbnFormats = new ArrayList<>();
         if (isbnValidator.isValidISBN10(isbn)) {
-            isbnFormats.add(convertToISBN13(isbn));
+            isbnFormats.add(convertToISBN13V2(isbn));
         } else if (isbnValidator.isValidISBN13(isbn)) {
             isbnFormats.add(convertToISBN10(isbn));
         } else {
@@ -95,7 +96,7 @@ public class BookUtils {
     }
 
     /**
-     * Used the apachec 'commons-validator' for converting ISBN10 to ISBN13 since the implementation is existing.
+     * Used the apache 'commons-validator' for converting ISBN10 to ISBN13 since the implementation is existing.
      * But we can opt to write our own just like {@link #convertToISBN10(String)} based from the formula here
      * https://isbn-information.com/convert-isbn-10-to-isbn-13.html
      *
@@ -117,14 +118,36 @@ public class BookUtils {
     public static String convertToISBN10(String isbn13) {
         int count = 10;
         int sum = 0;
-        String trimmedISBN13 = isbn13.trim().substring(3, isbn13.length() - 1);
+        String noDashesIsbn = isbn13.replace("-", "").trim();
+        String trimmedISBN13 = noDashesIsbn.trim().substring(3, noDashesIsbn.length() - 1);
         for (int a = 0; a < trimmedISBN13.length(); a++) {
             int digit = Integer.parseInt(trimmedISBN13.charAt(a) + "");
             sum = sum + (digit * count);
             count--;
         }
-        int checkDigit = 11 - (sum % 11);
-        return String.format("%s%s", trimmedISBN13, checkDigit);
+        return String.format("%s%s", trimmedISBN13, 11 - (sum % 11));
+    }
+
+    /**
+     * ISBN10 to ISBN13
+     * Implementation based on the info here: https://isbn-information.com/convert-isbn-10-to-isbn-13.html
+     *
+     * @param isbn10
+     * @return
+     */
+    public static String convertToISBN13V2(String isbn10) {
+        String noDashesIsbn = isbn10.replace("-", "").trim();
+        String isbn = ISBN_13_PREFIX + noDashesIsbn.substring(0, noDashesIsbn.length() - 1);
+        int sum = 0;
+        for (int i = 0; i < isbn.length(); i++) {
+            int digit = Integer.parseInt(isbn.charAt(i) + "");
+            if ((i + 1) % 2 == 0) {
+                sum = sum + (3 * digit);
+            } else {
+                sum = sum + (1 * digit);
+            }
+        }
+        return String.format("%s%s", isbn, (10 - (sum % 10)));
     }
 
 }
