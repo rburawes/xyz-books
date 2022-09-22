@@ -26,8 +26,7 @@ public class BookService {
     }
 
     public BookDto findBookByIsbn(String isbn) {
-        String noSpecialChars = isbn.replace("-", "");
-        Book book = bookRepository.findByIsbnInList(BookUtils.getIsbnVersions(noSpecialChars));
+        Book book = bookRepository.findByIsbnInList(BookUtils.getIsbnVersions(isbn));
         if (null != book) {
             return BookUtils.convertToBookDto(book);
         }

@@ -83,6 +83,7 @@ public class BookUtils {
      * @return
      */
     public static List<String> getIsbnVersions(String isbn) {
+        isbn = isbn.replace("-", "").trim();
         List<String> isbnFormats = new ArrayList<>();
         if (isbnValidator.isValidISBN10(isbn)) {
             isbnFormats.add(convertToISBN13V2(isbn));
@@ -118,8 +119,7 @@ public class BookUtils {
     public static String convertToISBN10(String isbn13) {
         int count = 10;
         int sum = 0;
-        String noDashesIsbn = isbn13.replace("-", "").trim();
-        String trimmedISBN13 = noDashesIsbn.trim().substring(3, noDashesIsbn.length() - 1);
+        String trimmedISBN13 = isbn13.trim().substring(3, isbn13.length() - 1);
         for (int a = 0; a < trimmedISBN13.length(); a++) {
             int digit = Integer.parseInt(trimmedISBN13.charAt(a) + "");
             sum = sum + (digit * count);
@@ -136,8 +136,7 @@ public class BookUtils {
      * @return
      */
     public static String convertToISBN13V2(String isbn10) {
-        String noDashesIsbn = isbn10.replace("-", "").trim();
-        String isbn = ISBN_13_PREFIX + noDashesIsbn.substring(0, noDashesIsbn.length() - 1);
+        String isbn = ISBN_13_PREFIX + isbn10.substring(0, isbn10.length() - 1);
         int sum = 0;
         for (int i = 0; i < isbn.length(); i++) {
             int digit = Integer.parseInt(isbn.charAt(i) + "");

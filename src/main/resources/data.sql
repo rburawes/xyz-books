@@ -32,7 +32,7 @@ values ('Programming in Scala', '9780981531618', 2, 48.88, '2019', 'https://imag
 insert into books (title, isbn, publisher_id, price, publication_year, image_url, edition, date_created, date_updated)
 values ('Give and Take: Why Helping Others Drives Our Success', '0315782145', 1, 28.00, '2014', 'https://images-na.ssl-images-amazon.com/images/I/41hSJrHd9VL._SX322_BO1,204,203,200_.jpg', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 insert into books (title, isbn, publisher_id, price, publication_year, image_url, edition, date_created, date_updated)
-values ('The Go Programming Language', '9780134190440', 1, 39.59, '2015', 'https://images-na.ssl-images-amazon.com/images/I/51JVIqRAMPL._SX598_BO1,204,203,200_.jpg', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+values ('The Go Programming Language', '9780134190440', 3, 39.59, '2015', 'https://images-na.ssl-images-amazon.com/images/I/51JVIqRAMPL._SX598_BO1,204,203,200_.jpg', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Books_Authors (many-to-many)
 insert into books_authors(books_id, authors_id) values (1, 1); -- Ryan Holiday - Ego Is The Enemy
