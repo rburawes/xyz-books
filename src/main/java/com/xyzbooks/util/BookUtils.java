@@ -82,17 +82,17 @@ public class BookUtils {
      * @param isbn
      * @return
      */
-    public static List<String> getIsbnVersions(String isbn) {
+    public static String[] getIsbnVersions(String isbn) {
         isbn = isbn.replace("-", "").trim();
-        List<String> isbnFormats = new ArrayList<>();
+        String[] isbnFormats = new String[2];
         if (isbnValidator.isValidISBN10(isbn)) {
-            isbnFormats.add(convertToISBN13V2(isbn));
+            isbnFormats[0] = convertToISBN13V2(isbn);
         } else if (isbnValidator.isValidISBN13(isbn)) {
-            isbnFormats.add(convertToISBN10(isbn));
+            isbnFormats[0] = convertToISBN10(isbn);
         } else {
             throw new InvalidRequestException("Invalid ISBN");
         }
-        isbnFormats.add(isbn);
+        isbnFormats[1] = isbn;
         return isbnFormats;
     }
 
